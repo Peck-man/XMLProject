@@ -10,12 +10,15 @@ import java.io.IOException;
 public class MainService {
 
     VillageService villageService;
+    VillagePartService villagePartService;
 
-    public MainService(VillageService villageService) {
+    public MainService(VillageService villageService, VillagePartService villagePartService) {
         this.villageService = villageService;
+        this.villagePartService = villagePartService;
     }
 
     public void runService() throws ParserConfigurationException, IOException, SAXException {
         villageService.saveVillage();
+        villagePartService.saveVillage();
     }
 }
