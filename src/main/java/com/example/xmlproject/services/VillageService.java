@@ -20,10 +20,10 @@ public class VillageService {
     @Autowired
     VillageRepository villageRepository;
 
-    public void saveVillage() throws ParserConfigurationException, IOException, SAXException {
+    public void saveVillage(String fileName) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.parse("20210331_OB_573060_UZSZ.xml");
+        Document doc = builder.parse(fileName);
         NodeList nodeList = doc.getElementsByTagName("vf:Obec");
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node node = nodeList.item(i);
