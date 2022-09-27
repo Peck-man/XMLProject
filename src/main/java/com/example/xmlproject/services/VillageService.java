@@ -25,12 +25,13 @@ public class VillageService {
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document doc = builder.parse("20210331_OB_573060_UZSZ.xml");
         NodeList nodeList = doc.getElementsByTagName("vf:Obec");
-        System.out.println(nodeList.getLength());
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node node = nodeList.item(i);
-            System.out.println("\nNode Name :" + node.getNodeName());
             Element eElement = (Element) node;
-            villageRepository.save(new Village(eElement.getElementsByTagName("obi:Nazev").item(0).getTextContent()));
+            String nameOfTheVillage = eElement.getElementsByTagName("obi:Nazev").item(0).getTextContent();
+            int code = Integer.parseInt(eElement.getElementsByTagName("obi:Kod").item(0).getTextContent());
+            Village villageToSave = new Village(nameOfTheVillage, code);
+            villageRepository.save(villageToSave);
         }
     }
 }

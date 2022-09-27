@@ -15,8 +15,10 @@ public class Village {
     private Integer id;
     private String name;
 
-    public Village(String name) {
-        this.name = name;
-    }
+    private int code;
 
+    public Village(String name, int code) {
+        this.name = name;
+        this.code = code;
+    }
 }
