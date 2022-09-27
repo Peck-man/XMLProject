@@ -1,5 +1,7 @@
 package com.example.xmlproject;
 
+import com.example.xmlproject.services.MainService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +15,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 @SpringBootApplication
 public class XmlProjectApplication implements CommandLineRunner {
+    @Autowired
+    MainService mainService;
 
     public static void main(String[] args) {
         SpringApplication.run(XmlProjectApplication.class, args);
@@ -20,18 +24,7 @@ public class XmlProjectApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.parse("20210331_OB_573060_UZSZ.xml");
-        NodeList nodeList = doc.getElementsByTagName("vf:Obec");
-        System.out.println(nodeList.getLength());
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Node node = nodeList.item(i);
-            System.out.println("\nNode Name :" + node.getNodeName());
-            Element eElement = (Element) node;
-            System.out.println("Název obce " + eElement.getElementsByTagName("obi:Nazev").item(0).getTextContent());
-
-        }
+        mainService.runService();
     }
     }
 
