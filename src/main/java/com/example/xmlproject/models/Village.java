@@ -12,7 +12,7 @@ import javax.persistence.Id;
 public class Village {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
     private String name;
 
     public Village(String name) {
