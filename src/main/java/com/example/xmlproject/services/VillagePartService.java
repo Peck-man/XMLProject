@@ -1,6 +1,5 @@
 package com.example.xmlproject.services;
 
-import com.example.xmlproject.models.Village;
 import com.example.xmlproject.models.VillagePart;
 import com.example.xmlproject.repositories.VillagePartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;

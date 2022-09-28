@@ -17,7 +17,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 public class XmlProjectApplication implements CommandLineRunner {
     @Autowired
     MainService mainService;
-    // TODO need to do automatic downloading and refactoring
 
     public static void main(String[] args) {
         SpringApplication.run(XmlProjectApplication.class, args);
@@ -25,7 +24,7 @@ public class XmlProjectApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        mainService.runService();
+        mainService.run();
     }
     }
 
