@@ -1,11 +1,10 @@
 package com.example.xmlproject.models;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity @NoArgsConstructor @Data
+@Entity @Data
 public class VillagePart {
     @Id
     @SequenceGenerator(name = "villagePartGenerator", sequenceName = "VILLAGEPART_SEQUENCE", allocationSize = 1)
@@ -14,10 +13,16 @@ public class VillagePart {
     private int code;
     private int villageCode;
     private String name;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Village village;
 
-    public VillagePart(int code, int villageCode, String name) {
+    public VillagePart(int code, int villageCode, String name, Village village) {
         this.code = code;
         this.villageCode = villageCode;
         this.name = name;
+        this.village = village;
+    }
+
+    public VillagePart() {
     }
 }

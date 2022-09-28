@@ -1,11 +1,10 @@
 package com.example.xmlproject.models;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity @Data @NoArgsConstructor
+@Entity @Data
 public class Village {
     @Id
     @SequenceGenerator(name = "villageGenerator", sequenceName = "VILLAGE_SEQUENCE", allocationSize = 1)
@@ -14,6 +13,8 @@ public class Village {
     private String name;
 
     private int code;
+    public Village() {
+    }
 
     public Village(String name, int code) {
         this.name = name;

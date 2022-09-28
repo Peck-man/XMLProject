@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VillageRepository extends JpaRepository<Village, Integer> {
+    Village findByCode(int code);
 }
