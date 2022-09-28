@@ -1,15 +1,15 @@
 package com.example.xmlproject.services;
 
+import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 
 @Service
 public class MainService {
@@ -22,18 +22,25 @@ public class MainService {
         this.villagePartService = villagePartService;
     }
 
-    public void runService() throws ParserConfigurationException, IOException, SAXException {
+    public void runService() throws ParserConfigurationException, IOException, SAXException, ZipException {
         String fileName = downAndCreateFile();
         villageService.saveVillage(fileName);
         villagePartService.saveVillage(fileName);
     }
 
-    public String downAndCreateFile() throws IOException {
-        String fileName = "sourceFile.xml";
-        URL url = new URL("https://www.smartform.cz/download/kopidlno.xml.zip");
-        ReadableByteChannel readableByteChannel = Channels.newChannel(url.openStream());
+    public String downAndCreateFile() throws IOException, ZipException {
+        String fileName = "20210331_OB_573060_UZSZ.zip";
+        String url = "https://www.smartform.cz/download/kopidlno.xml.zip";
+        BufferedInputStream in = new BufferedInputStream(new URL(url).openStream());
         FileOutputStream fileOutputStream = new FileOutputStream(fileName);
-        fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
-        return fileName;
+        byte dataBuffer[] = new byte[1024];
+        int bytesRead;
+        while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
+            fileOutputStream.write(dataBuffer, 0, bytesRead);
+        }
+        ZipFile zipFile = new ZipFile("20210331_OB_573060_UZSZ.zip");
+        zipFile.extractAll("src/main/resources");
+
+        return "src/main/resources/20210331_OB_573060_UZSZ.xml";
     }
 }
